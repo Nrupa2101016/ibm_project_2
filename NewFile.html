@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ChatBot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .chatbot-container {
+            width: 90%; /* Updated to occupy 90% of the screen width on small screens */
+            max-width: 500px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 50px;
+        }
+
+        .chat-header {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .chat-body {
+            padding: 15px;
+            max-height: 300px; /* Updated to have a maximum height for scrolling on small screens */
+            overflow-y: scroll;
+        }
+
+        .user-message, .bot-message {
+            max-width: 80%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .user-message {
+            background-color: #e0e0e0;
+            align-self: flex-end;
+        }
+
+        .bot-message {
+            background-color: #4CAF50;
+            color: #fff;
+            align-self: flex-start;
+        }
+
+        .chat-input {
+            display: flex;
+            flex-direction: column; /* Updated to column layout on small screens */
+            align-items: stretch;
+            border-top: 1px solid #ddd;
+            padding: 15px;
+        }
+
+        .user-input {
+            flex: 1;
+            margin-bottom: 10px; /* Added margin for separation on small screens */
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .send-button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+        }
+
+        .option-button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        @media only screen and (min-width: 768px) {
+            /* Apply styles for screens larger than 768px */
+            .chatbot-container {
+                width: 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="chatbot-container">
+    <div class="chat-header">ChatBot</div>
+    <div class="chat-body" id="chatBody">
+        <div class="bot-message">Hello! How can I assist you today?</div>
+    </div>
+    <div class="chat-input">
+        <input type="text" class="user-input" id="userInput" placeholder="Type your message...">
+        <button class="send-button" onclick="sendMessage()">Send</button>
+    </div>
+    <div class="options">
+        <button class="option-button" onclick="sendOption('Order Now')">Order Now</button>
+        <button class="option-button" onclick="sendOption('View Products')">View Products</button>
+    </div>
+</div>
+
+<script>
+    function sendMessage() {
+        const userInput = document.getElementById('userInput').value;
+        if (userInput.trim() !== '') {
+            appendUserMessage(userInput);
+            // You can add logic here to process the user input and generate a bot response.
+            // For simplicity, let's just provide a generic response.
+            const botResponse = "I'm just a demo bot. I don't have advanced capabilities yet!";
+            appendBotMessage(botResponse);
+            document.getElementById('userInput').value = '';
+        }
+    }
+
+    function sendOption(option) {
+        appendUserMessage(option);
+        // You can add logic here to handle the selected option.
+        // For simplicity, let's just provide a generic response for the selected option.
+        const botResponse = `You selected: ${option}`;
+        appendBotMessage(botResponse);
+    }
+
+    function appendUserMessage(message) {
+        const chatBody = document.getElementById('chatBody');
+        const userMessage = document.createElement('div');
+        userMessage.className = 'user-message';
+        userMessage.textContent = message;
+        chatBody.appendChild(userMessage);
+    }
+
+    function appendBotMessage(message) {
+        const chatBody = document.getElementById('chatBody');
+        const botMessage = document.createElement('div');
+        botMessage.className = 'bot-message';
+        botMessage.textContent = message;
+        chatBody.appendChild(botMessage);
+    }
+</script>
+<!-- ... Rest of the HTML content ... -->
+
+</body>
+</html>
